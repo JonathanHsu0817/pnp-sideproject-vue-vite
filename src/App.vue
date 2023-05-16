@@ -22,6 +22,8 @@ header {
 <style lang="scss">
 @import "./assets/all.scss";
 
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
+
 
 </style>

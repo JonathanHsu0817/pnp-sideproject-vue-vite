@@ -96,7 +96,8 @@ $utilities: map-merge(
         (
           "body": $body-bg,
           "white": $white,
-          "transparent": transparent
+          "transparent": transparent,
+          "primary-light": rgba($primary, 0.5)
         )
       )
     ),

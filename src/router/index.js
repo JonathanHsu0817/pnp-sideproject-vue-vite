@@ -17,6 +17,14 @@ const router = createRouter({
       component: () => import('../views/DashBoardView.vue'),
       children: [
         {
+          path: 'orders',
+          component: () => import('../views/admin/AdminOrders.vue')
+        },
+        {
+          path: 'coupons',
+          component: () => import('../views/admin/AdminCoupons.vue')
+        },
+        {
           path: 'products',
           component: () => import('../views/admin/AdminProducts.vue')
         }

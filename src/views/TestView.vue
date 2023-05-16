@@ -6,22 +6,23 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        userData: [],
-      };
-    },
-    methods: {
-      getData(){
-        this.$http.get(`https://randomuser.me/api/`)
-          .then(res => {
-            console.log(res)
-          })
-      }
-    },
-    mounted() {
-      this.getData();
+
+export default {
+  data() {
+    return {
+      userData: [],
+    };
+  },
+  methods: {
+    getData(){
+      this.$http.get(`https://randomuser.me/api/`)
+        .then(res => {
+          console.log(res)
+        })
     }
+  },
+  mounted() {
+    this.getData();
   }
+}
 </script>

@@ -1,10 +1,13 @@
 <template>
-  <div class="container mt-4">
-    <div class="row justify-content-center">
-      <h1 class="h3 mb-3 text-center font-weight-normal">
-        請先登入
-      </h1>
+  <VueLoading :active="isLoading">
+    <img src="@/assets/loading.svg" alt="">
+  </VueLoading>
+  <div class="container vh-100">
+    <div class="row justify-content-center align-items-center h-100">
       <div class="col-8">
+        <h1 class="h3 mb-3 text-center font-weight-normal">
+        請先登入
+        </h1>
         <form id="form" class="form-signin" @submit.prevent="login">
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="username"
@@ -27,6 +30,12 @@
 </template>
 
 <style>
+  .loading{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    display:inline-block;
+  }
   .form-signin {
     width: 100%;
     max-width: 330px;
@@ -36,26 +45,44 @@
 </style>
 
 <script>
+  import Swal from 'sweetalert2'
+  const { VITE_API_URL } = import.meta.env
+
   export default {
     data() {
       return {
         user: {  
           username:``,
           password:``
-        }
+        },
+        isLoading: false
       };
     },
     methods: {
       login() {
-        const api = `${import.meta.env.VITE_API_URL}admin/signin`;
+        this.isLoading = true
+        const api = `${VITE_API_URL}admin/signin`;
         this.$http.post(api, this.user)
           .then(res => {
-            const { token, expired } = res.data;
+            const { token, expired, message } = res.data;
             document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
+            Swal.fire({
+              icon: 'success',
+              title: message,
+              showConfirmButton: false,
+              timer: 1500
+            })
             this.$router.push('/admin/products')
+            this.isLoading = false
           })
           .catch(err => {
-            alert(err.response.data.message);
+            Swal.fire({
+              icon: 'error',
+              title: err.response.data.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.isLoading = false
           })
       }
     }

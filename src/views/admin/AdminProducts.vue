@@ -1,4 +1,7 @@
 <template>
+  <VueLoading :active="isLoading">
+    <img src="@/assets/loading.svg" alt="">
+  </VueLoading>
   <div class="container">
     <div class="text-end mt-4">
       <button class="btn btn-primary" @click="openModal('new')">
@@ -69,11 +72,12 @@
     :temp-product="tempProduct" 
     :is-new="isNew" 
     @update-products="updateProductsData"></ProductModal>
-  <DelModal ref="delModal" @delete-product="delProduct"></DelModal>
+  <DelModal ref="delModal" :temp-item="tempProduct" @delete-product="delProduct"></DelModal>
   <!-- Modal -->
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import ProductModal from '@/components/ProductModal.vue'
 import DelModal from '@/components/DelModal.vue';
 import pagination from '@/components/PaginationComponent.vue';
@@ -93,20 +97,30 @@ export default {
 			isNew: false,
       pages: {},
       productModal: '',
+      isLoading: false
 		}
 	},
 	methods:{
 		getProductsData(pageNum = 1){
+      this.isLoading = true
 			this.$http.get(`${VITE_API_URL}api/${VITE_API_PATH}/admin/products/?page=${pageNum}`)
 				.then(res=>{
 					this.products = res.data.products;
           this.pages = res.data.pagination;
+          this.isLoading = false
 				})
 				.catch(err=>{
-					alert(err.response.data.message);
+          Swal.fire({
+            icon: 'error',
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+					this.isLoading = false
 				})
 		},
 		updateProductsData(){
+      this.isLoading = true
 			let url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/product`;
 			let http = 'post';
 
@@ -115,25 +129,52 @@ export default {
 				http = 'put';
 			}
 
-			this.$http[http](url, { data: this.tempProduct }).then((response) => {
-				alert(response.data.message);
-				this.$refs.productModal.hide();
+			this.$http[http](url, { data: this.tempProduct })
+        .then((res) => {
+          this.$refs.productModal.hide();
+          Swal.fire({
+            icon: 'success',
+            title: res.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
 				this.getProductsData();
-				}).catch((err) => {
-					alert(err.response.data.message);
+        this.isLoading = false
+				})
+        .catch(err => {
+					Swal.fire({
+            icon: 'error',
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+					this.isLoading = false
 			})
 		},
 		delProduct() {
+      this.isLoading = true
 			const url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
 
 			this.$http.delete(url)
-				.then((response) => {
+				.then(res => {
         this.$refs.delModal.hide()
-				alert(response.data.message);
+				Swal.fire({
+            icon: 'success',
+            title: res.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
 				this.getProductsData();
+        this.isLoading = false
 				})
-				.catch((err) => {
-				alert(err.response.data.message);
+				.catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.isLoading = false
 				})
 		},
 		openModal(isNew,item){
@@ -151,9 +192,6 @@ export default {
 				this.tempProduct ={...item};
 				this.$refs.delModal.show()
 			}
-		},
-		addImages(){
-			this.tempProduct.imagesUrl=[];
 		}
 	},
 	mounted(){

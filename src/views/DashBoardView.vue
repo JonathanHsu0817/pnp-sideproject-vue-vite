@@ -1,7 +1,4 @@
 <template>
-  <VueLoading :active="isLoading">
-    <img src="../assets/loading.svg" alt="">
-  </VueLoading>
   <div class="d-flex" :class="{'sidebar-toggled': isOpened }">
     <aside class="sidebar vh-100 border-end d-flex bg-white flex-column">
       <!-- 1. 後台名稱 -->
@@ -91,6 +88,7 @@ export default {
       status: false,
       isOpened: false,
       orderToggle: '',
+      isLoading: false,
     }
   },
   methods: {

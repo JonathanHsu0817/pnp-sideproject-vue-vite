@@ -62,7 +62,7 @@
       </div>
       <!-- pagination -->
       <div class="card-footer bg-transparent -mt-xs-1">
-        <pagination :pages="pages" :get-products = "getProductsData" @change-page="getProductsData"></pagination>
+        <Pagination :pagination="pagination" :get-items = "getProductsData" @change-page="getProductsData"></Pagination>
       </div>
     </div>
   </div>
@@ -71,8 +71,8 @@
     ref="productModal" 
     :temp-product="tempProduct" 
     :is-new="isNew" 
-    @update-products="updateProductsData"></ProductModal>
-  <DelModal ref="delModal" :temp-item="tempProduct" @delete-product="delProduct"></DelModal>
+    @update-product="updateProductsData"></ProductModal>
+  <DelModal ref="delModal" :temp-item="tempProduct" @delete-item="delProduct"></DelModal>
   <!-- Modal -->
 </template>
 
@@ -80,13 +80,13 @@
 import Swal from 'sweetalert2'
 import ProductModal from '@/components/ProductModal.vue'
 import DelModal from '@/components/DelModal.vue';
-import pagination from '@/components/PaginationComponent.vue';
+import Pagination from '@/components/PaginationComponent.vue';
 
 const { VITE_API_URL,VITE_API_PATH } = import.meta.env;
 
 export default {
   components:{
-    pagination,DelModal,ProductModal
+    Pagination,DelModal,ProductModal
   },
   data(){
 		return {
@@ -95,7 +95,7 @@ export default {
 			},
 			products: [],
 			isNew: false,
-      pages: {},
+      pagination: {},
       productModal: '',
       isLoading: false
 		}
@@ -106,7 +106,7 @@ export default {
 			this.$http.get(`${VITE_API_URL}api/${VITE_API_PATH}/admin/products/?page=${pageNum}`)
 				.then(res=>{
 					this.products = res.data.products;
-          this.pages = res.data.pagination;
+          this.pagination = res.data.pagination;
           this.isLoading = false
 				})
 				.catch(err=>{

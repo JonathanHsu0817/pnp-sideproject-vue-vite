@@ -2,23 +2,23 @@
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end align-items-center mb-0 py-2">
       <li class="page-item"
-        :class="{ disabled: !pages.has_pre}">
+        :class="{ disabled: !pagination.has_pre}">
         <a class="page-link" href="#" aria-label="Previous" 
-          @click="getProducts(pages.current_page-1)">
+          @click="getProducts(pagination.current_page-1)">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
 
       <li class="page-item"
-        :class="{ active: page === pages.current_page }"
-        v-for="page in pages.total_pages" :key="page +'page'">
+        :class="{ active: page === pagination.current_page }"
+        v-for="page in pagination.total_pages" :key="page +'page'">
         <a class="page-link" href="#" @click="$emit('change-page',page)">{{page}}</a>
       </li>
 
       <li class="page-item"
-        :class="{ disabled: !pages.has_next }">
+        :class="{ disabled: !pagination.has_next }">
         <a class="page-link" href="#" aria-label="Next" 
-          @click="getProducts(pages.current_page+1)">
+          @click="getProducts(pagination.current_page+1)">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
@@ -28,7 +28,7 @@
 
 <script>
   export default {
-    props:['pages','getProducts']
+    props:['pagination','getItems']
   }
 </script>
 

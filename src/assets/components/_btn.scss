@@ -1,0 +1,75 @@
+.btn-shopping-cart{
+  &:hover{
+    opacity: 0.75;
+    transition: 0.3s;
+  }
+}
+
+.btn-circle{
+  padding: 10.5px 10.5px 7.5px 9px;
+  border-radius: 50%;
+}
+
+.btn-circle1{
+  padding: 11.5px 12.5px 6.5px 13px;
+  border-radius: 50%;
+}
+
+.btn-menu-icon{
+  padding: 10px 12.25px 8px 12.25px;
+}
+
+.btn-bg-white{
+  background: #fff;
+  &:hover{
+    color: #fff;
+  }
+}
+
+.btn-text-white{
+  color: $white;
+  background: $primary;
+  &:hover{
+    color: $backStage;
+  }
+}
+
+.btn-text-primary{
+  color: $primary;
+  background: $backStage;
+  &:hover{
+    color: #fff;
+  }
+}
+
+.btn{
+  &-xl{
+    padding: 8px 24px;
+  }
+  &-xxl{
+    padding: 12px 27px;
+    @include media-breakpoint-up(md){
+      padding: 12px 48px;
+    }
+  }
+}
+
+.btn-animation{
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  vertical-align: middle;
+  display: flex;
+  transition: 0.3s;
+
+  &::before,&::after{
+    content: "";
+    position: absolute;
+    transition: 0.3s;
+  }
+}
+
+.btn-shine{
+  justify-content: center;
+}

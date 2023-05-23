@@ -105,12 +105,12 @@ export default {
             showConfirmButton: false,
             timer: 1500
           })
-          this.$router.push(`/`)
+          this.$router.push(`/login`)
         })
     },
     logout(){
       document.cookie = `hexschool=; expires=${new Date()}`;
-      this.$router.push('/');
+      this.$router.push('/login');
     },
     menuToggle(){
       this.orderToggle.toggle()

@@ -5,7 +5,7 @@ const CustomToast = Swal.mixin({
   position: 'top-right',
   showConfirmButton: false,
   timer: 1500,
-  background: '#F6F6F5'
+  background: '$#FCE9E4'
 })
 
 export const Toast = (msg, type) => {

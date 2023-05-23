@@ -4,13 +4,41 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/test',
+      component: () => import('../views/TestView.vue')
+    },
+    {
+      path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/test',
-      component: () => import('../views/TestView.vue')
+      path: '/',
+      name: 'index',
+      component: () => import('../views/FrontView.vue'),
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: () => import('../views/front/HomeView.vue')
+        },
+        {
+          path: 'products',
+          component: () => import('../views/front/ProductsView.vue')
+        },
+        {
+          path: 'product/:id',
+          component: () => import('../views/front/ProductView.vue')
+        },
+        {
+          path: 'cart',
+          component: () => import('../views/front/CartCheck.vue')
+        },
+        {
+          path: 'payment',
+          component: () => import('../views/front/PaymentView.vue')
+        },
+      ]
     },
     {
       path: '/admin',

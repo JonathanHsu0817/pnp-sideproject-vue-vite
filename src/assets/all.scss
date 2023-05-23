@@ -47,5 +47,15 @@
 // Utilitbootstrap/scss/ies
 @import "bootstrap/scss/utilities/api";
 
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
 // Components
 @import "./components/sidebar";
+@import "./components/btn";
+@import "./components/img";
+@import "./components/swiper";
+
+// layout 
+@import "./layout/home";

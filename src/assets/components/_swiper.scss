@@ -1,0 +1,66 @@
+//熱門餐點swiper
+.index-swiper {
+  .swiper-wrapper {
+    @include media-breakpoint-up(md) {
+      height: 255px;
+    }
+    @include media-breakpoint-up(lg) {
+      height: 344px;
+    }
+    @include media-breakpoint-up(xl) {
+      height: 398px;
+    }
+  }
+  .swiper-slide {
+    @include media-breakpoint-up(md) {
+      display: flex;
+      align-items: center;
+    }
+    transition: .8s;
+    &-prev, &-next {
+      @include media-breakpoint-up(md) {
+        width: 32% !important;
+      }
+      @include media-breakpoint-up(xl) {
+        width: 22% !important;
+      }
+    }
+  }
+  .img-info-background {
+    transition: .8s;
+    @include media-breakpoint-up(md) {
+      transform: scale(0%);
+    }
+  }
+  .swiper-slide-active {
+    transition: .8s;
+    @include media-breakpoint-up(md) {
+      width: 32% !important;
+    }
+    @include media-breakpoint-up(xl) {
+        width: 26% !important;
+    }
+    .img-info-background {
+      opacity: 1 !important;
+      display: block !important;
+      @include media-breakpoint-up(md) {
+        transform: scale(100%);
+      }
+    }
+  }
+  .swiper-pagination {
+    position: unset;
+    &-bullet {
+      padding: 4px;
+      border-radius: 50%;
+      border: 0.5px solid $gray-500;
+      background: $white;
+      opacity: 1;
+      transition: .5s;
+    }
+    &-bullet-active {
+      background: $primary;
+      transition: .5s;
+    }
+  }
+}

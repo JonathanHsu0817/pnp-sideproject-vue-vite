@@ -20,6 +20,14 @@ $utilities: map-merge(
       class: display,
       values: $display-font-sizes
     ),
+    "font-family": (
+      property: font-family,
+      class: font,
+      values: (
+          normal: var(--#{$prefix}font-sans-serif),
+          monospace: var(--#{$prefix}font-monospace)
+        )
+    ),
     "font-size": (
       rfs: false,
       responsive: true,

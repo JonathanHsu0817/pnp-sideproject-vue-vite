@@ -1,0 +1,19 @@
+.about{
+  height: 46.5vh;
+  background-image: url("/ImgAbout01.svg"),url("/ImgAbout02.svg"),url("/ImgAbout03.svg");
+  background-repeat: no-repeat;
+  background-size: 15%,30%,18%;
+  background-position: top 0px left 18%, bottom -12px left 0px,top 0px right 0px;
+  @include media-breakpoint-up(md){
+    height: 30vh;
+    background-size: 15%,25%,15%;
+  }
+  @include media-breakpoint-up(lg){
+    background-size: 12%,18%,12%;
+    background-position: top 0px left 27%, bottom -12px left 0px,top 0px right 0px;
+  }
+  @include media-breakpoint-up(xl){
+    background-size: 12%,20%,15%;
+    background-position: top 0px left 25%, bottom -20px left 0px,top 0px right 0px;
+  }
+}

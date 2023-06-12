@@ -27,7 +27,7 @@
     <div class="cart-charge-content px-3 d-flex mb-16">
       <div class="d-flex align-items-center ms-auto">
         <h5 class="mb-0">小計金額</h5>
-        <span class="cart-charge-total text-primary fs-6 ms-3">{{ `NT$ ${priceFormat(1)}` }}</span>
+        <span class="cart-charge-total text-primary fs-6 ms-3">{{ `NT$ ${priceFormat(total)}` }}</span>
       </div>
     </div>
     <div class="cart-footer px-3 font-monospace">
@@ -69,7 +69,7 @@ export default {
     this.getCart()
   },
   computed: {
-    ...mapState(cartStore, ['carts','loadingItem'])
+    ...mapState(cartStore, ['carts','loadingItem','total'])
   }
 }
 </script>

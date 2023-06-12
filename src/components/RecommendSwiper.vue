@@ -23,7 +23,7 @@
     :modules="modules"
     class="index-swiper"
   >
-    <SwiperSlide v-for="product in products" :key="product.id">
+    <SwiperSlide v-for="product in sortProducts" :key="product.id">
       <RouterLink :to="`/product/${product.id}`" class="img-info d-block">
         <img :src="product.imageUrl" class="img-fluid rounded-3" :alt="product.imageUrl">
         <div class="img-info-background bg-transparent opacity-0">
@@ -38,34 +38,28 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia';
+import productsStore from '@/stores/productsStore.js'
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay,Pagination} from 'swiper'
-import { Toast } from '@/methods/toast.js'
-
-const { VITE_API_URL,VITE_API_PATH } = import.meta.env;
 
 export default {
   data() {
     return {
       modules: [Autoplay,Pagination],
-      products: [],
-      product: {}
     }
+  },
+  methods: {
+    ...mapActions( productsStore, ['getProducts'])
+  },
+  computed:{
+    ...mapState( productsStore, ['sortProducts'])
   },
   components: {
     Swiper,
     SwiperSlide
   },
-  methods: {
-    getProducts() {
-      // this.isLoading = true
-      this.$http.get(`${VITE_API_URL}/api/${VITE_API_PATH}/products`)
-        .then(res => {
-          this.products = res.data.products
-        })
-        .catch(err => Toast(err.response.data.message, 'error'))
-      }
-    },
   mounted(){
     this.getProducts()
   }

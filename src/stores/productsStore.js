@@ -31,6 +31,7 @@ export default defineStore('productsStore',{
       if (this.category !== category) {
         this.category = category
         this.getProducts()
+        this.category = ''
       }
     }
   },

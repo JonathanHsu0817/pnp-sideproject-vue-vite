@@ -7,62 +7,33 @@
       </div>
       <button type="button" class="btn-close text-reset me-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="cart-body px-3 font-monospace">
-      <!-- <div class="cart-card d-flex align-items-center border-bottom border-1 pb-4 mb-4">
-        <img class="cart-img object-position-top me-2 me-md-3" src="./assets/images/rib-eye-steak.png" alt="steak">
-        <div class="card-content col-5">
-          <p class="mb-2">20oz肋眼牛排（5分熟)</p>
-          <span class="text-primary">NT$1,190</span>
-        </div>
-        <div class="cart-num col-2 ms-2 ms-md-3">
-          <input type="number" class="cart-input text-center lh-1 py-3  " id="cart-input" value="1">
-        </div>
-        <a href="#" class="cart-delete d-block ms-4 ms-md-3"><i class="fas fa-trash-alt text-primary fs-4"></i></a>
-      </div>
+    <div v-if="!carts.length" class="text-center mb-8">購物車沒有任何品項</div>
+    <div v-for="cartItem in carts" :key="cartItem.id" class="cart-body px-3 font-monospace">
       <div class="cart-card d-flex align-items-center border-bottom border-1 pb-4 mb-4">
-        <img class="cart-img object-position-top me-2 me-md-3" src="./assets/images/spinach.png" alt="spinach">
+        <img class="cart-img object-position-top me-2 me-md-3" :src="cartItem.product.imageUrl" :alt="cartItem.product.title">
         <div class="card-content col-5">
-          <p class="mb-2">奶油燉菠菜</p>
-          <span class="text-primary">NT$190</span>
+          <p class="mb-2">{{ cartItem.product.title }}</p>
+          <span class="text-primary">{{ `NT$ ${priceFormat(cartItem.product.price)}` }}</span>
         </div>
         <div class="cart-num col-2 ms-2 ms-md-3">
-          <input type="number" class="cart-input text-center lh-1 py-3  " id="cart-input" value="1">
+          <input type="number" class="cart-input text-center lh-1 py-3" id="cart-input" v-model.number="cartItem.qty"  @change="updateCart(cartItem)" :disabled="cartItem.id === loadingItem">
         </div>
-        <a href="#" class="cart-delete d-block ms-4 ms-md-3"><i class="fas fa-trash-alt text-primary fs-4"></i></a>
+        <a href="#" class="cart-delete d-block ms-4 ms-md-3" @click="delCart(cartItem.id)" :disabled="cartItem.id === loadingItem">
+          <i v-if="cartItem.id === loadingItem" class="fas fa-spinner fa-pulse" ></i>
+          <i v-else class="fas fa-trash-alt text-primary fs-4"></i>
+        </a>
       </div>
-      <div class="cart-card d-flex align-items-center border-bottom border-1 pb-4 mb-4">
-        <img class="cart-img object-position-top me-2 me-md-3" src="./assets/images/mushroom.png" alt="mushroom">
-        <div class="card-content col-5">
-          <p class="mb-2">白酒炒蘑菇</p>
-          <span class="text-primary">NT$250</span>
-        </div>
-        <div class="cart-num col-2 ms-2 ms-md-3">
-          <input type="number" class="cart-input text-center lh-1 py-3  " id="cart-input" value="1">
-        </div>
-        <a href="#" class="cart-delete d-block ms-4 ms-md-3"><i class="fas fa-trash-alt text-primary fs-4"></i></a>
+    </div>
+    <div class="cart-charge-content px-3 d-flex mb-16">
+      <div class="d-flex align-items-center ms-auto">
+        <h5 class="mb-0">小計金額</h5>
+        <span class="cart-charge-total text-primary fs-6 ms-3">{{ `NT$ ${priceFormat(1)}` }}</span>
       </div>
-      <div class="cart-card d-flex align-items-center border-bottom border-1 pb-4 mb-4">
-        <img class="cart-img object-position-top me-2 me-md-3" src="./assets/images/coffee_ice.png" alt="coffee_ice">
-        <div class="card-content col-5">
-          <p class="mb-2">美式咖啡(冰)</p>
-          <span class="text-primary">NT$80</span>
-        </div>
-        <div class="cart-num col-2 ms-2 ms-md-3">
-          <input type="number" class="cart-input text-center lh-1 py-3  " id="cart-input" value="1">
-        </div>
-        <a href="#" class="cart-delete d-block ms-4 ms-md-3"><i class="fas fa-trash-alt text-primary fs-4"></i></a>
-      </div>
-      <div class="cart-charge-content d-flex mb-16">
-        <div class="d-flex align-items-center ms-auto">
-          <h5 class="mb-0">小計金額</h5>
-          <span class="cart-charge-total text-primary fs-6 ms-3">NT$1,610</span>
-        </div>
-      </div> -->
     </div>
     <div class="cart-footer px-3 font-monospace">
       <div class="d-flex flex-column">
         <a href="#" class="js-confirm btn btn-primary text-white round-0 py-3 mb-6">加點</a>
-        <a href="#" class="js-deleteAllCart btn btn-outline-secondary border-0 round-0 align-self-center py-2 px-4 mb-4">清空購物車</a>
+        <a href="#" class="js-deleteAllCart btn btn-outline-secondary border-0 round-0 align-self-center py-2 px-4 mb-4" @click="delCarts()">清空購物車</a>
       </div>
     </div>
   </div>
@@ -70,6 +41,9 @@
 
 <script>
 import Offcanvas from 'bootstrap/js/dist/offcanvas.js'
+
+import { mapState, mapActions } from 'pinia';
+import cartStore from '@/stores/cartStore.js'
 
 export default {
   data() {
@@ -79,14 +53,23 @@ export default {
   },
   methods: {
     show(){
-      this.cartOffcanvas.show();
+      this.cartOffcanvas.show()
     },
     hide(){
-      this.cartOffcanvas.hide();
+      this.cartOffcanvas.hide()
     },
+    priceFormat(price){
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    },
+    ...mapActions(cartStore, ['getCart','delCart', 'updateCart','delCarts']),
+
   },
   mounted() {
     this.cartOffcanvas = new Offcanvas(this.$refs.cartOffcanvas)
+    this.getCart()
+  },
+  computed: {
+    ...mapState(cartStore, ['carts','loadingItem'])
   }
 }
 </script>

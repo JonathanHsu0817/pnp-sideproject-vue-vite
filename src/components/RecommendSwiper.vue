@@ -61,7 +61,6 @@ export default {
       // this.isLoading = true
       this.$http.get(`${VITE_API_URL}/api/${VITE_API_PATH}/products`)
         .then(res => {
-          console.log(res.data)
           this.products = res.data.products
         })
         .catch(err => Toast(err.response.data.message, 'error'))

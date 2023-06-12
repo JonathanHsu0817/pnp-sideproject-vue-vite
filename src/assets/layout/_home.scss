@@ -17,3 +17,26 @@
     background-position: top 0px left 25%, bottom -20px left 0px,top 0px right 0px;
   }
 }
+
+.menu-list li a{
+  position: relative;
+  &::after{
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 2px;
+    bottom: 0px;
+    background-color: $primary;
+    transition: all 0.5s;
+  }
+  &:hover{
+    &::after{
+      width: 75%;
+    }
+  }
+  &.active{
+    &::after{
+      width: 75%;
+    }
+  }
+}

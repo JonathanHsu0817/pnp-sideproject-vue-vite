@@ -1,39 +1,62 @@
+.bg-img{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 //img.info >img + img-info-background > img-content
 .img-info {
   position: relative;
   &-background {
-      display: block;
-      opacity: 0;
-      transition: .3s;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 8px 12px;
-     
-      @include media-breakpoint-up(md){
-        padding: 16px;
-      }
+    display: block;
+    opacity: 0;
+    transition: .3s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 8px 12px;
+    @include media-breakpoint-up(md){
+      padding: 16px;
+    }
   }
   &-content {
     color: $white;
     height: 100%;
     overflow: hidden;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  &:hover &-background {
-      opacity: 1 !important;
-      transition: .3s;
-    }
+  &-link{
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    left: 0;
+    bottom: -32px;
+    transition: .3s;
+  }
+  &:hover &-background{
+    opacity: 1 !important;
+    transition: .3s;
+  }
+  &:hover &-link{
+    bottom: 0px;
+    opacity: 1;
+  }
 }
 
-.img-top{
-  transition: all 0.3s;
-  &:hover{
-    transform: scale(1.1);
+.cart-card{
+  .cart-img{
+    width: 72px;
+    @include media-breakpoint-up(md){
+      width: 92px;
+    }
   }
+}
+
+.img-top:hover{
+  opacity: 0.8;
+  transition: .3s;
 }

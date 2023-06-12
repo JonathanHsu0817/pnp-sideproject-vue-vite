@@ -1,10 +1,10 @@
 <template>
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end align-items-center mb-0 py-2">
+    <ul class="pagination justify-content-center align-items-center mb-0 py-2">
       <li class="page-item"
-        :class="{ disabled: !pagination.has_pre}">
+        :class="{ disabled: !pagination.has_pre }">
         <a class="page-link" href="#" aria-label="Previous" 
-          @click="getProducts(pagination.current_page-1)">
+          @click="getProducts( pagination.current_page-1 )">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
@@ -18,7 +18,7 @@
       <li class="page-item"
         :class="{ disabled: !pagination.has_next }">
         <a class="page-link" href="#" aria-label="Next" 
-          @click="getProducts(pagination.current_page+1)">
+          @click="getProducts( pagination.current_page+1 )">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>

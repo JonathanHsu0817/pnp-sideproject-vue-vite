@@ -19,7 +19,7 @@
   <section class="swiper-popular py-11">
     <div class="container">
       <nav>
-        <div class="d-flex justify-content-between mb-7">
+        <div class="d-flex justify-content-between">
           <h3 class="font-monospace fs-4 fs-md-3 mb-0">熱門餐點 <span class="text-primary fs-7 font-normal">Popular Dishes</span></h3>
           <RouterLink to="/products" class="d-block more d-flex align-items-center text-decoration-none">
             <h4 class="text-black fs-7 lh-base me-2 mb-0 font-normal">MORE</h4>

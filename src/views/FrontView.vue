@@ -10,10 +10,13 @@
         </RouterLink>
       </h1>
       
-      <div class="d-flex align-center">
+      <div class="d-flex align-center me-2">
         <RouterLink to="/login" class="btn btn-primary me-md-2 pt-2 pb-1"><i class="fas fa-user text-white fs-3"></i></RouterLink>
-        <button class="btn btn-shopping-cart btn-circle bg-white" type="button" @click="openCart">
+        <button class="btn btn-shopping-cart btn-circle bg-white position-relative " type="button" @click="openCart">
           <i class="fas fa-shopping-cart text-primary fs-4"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill px-2">
+            {{ carts.length }}
+          </span>
         </button>
       </div>
     </div>
@@ -28,6 +31,9 @@
 import MenuOffcanvas from '@/components/MenuOffcanvas.vue'
 import CartOffcanvas from '@/components/CartOffcanvas.vue'
 import FooterComp from '@/components/FooterView.vue'
+
+import { mapState } from 'pinia';
+import cartStore from '@/stores/cartStore.js'
 
 export default {
   components:{
@@ -44,7 +50,10 @@ export default {
     },
     openCart(){
       this.$refs.cartOffcanvas.show();
-    },
+    }
+  },
+  computed: {
+    ...mapState(cartStore, ['carts'])
   }
 }
 </script>

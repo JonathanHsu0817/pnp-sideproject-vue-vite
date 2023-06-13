@@ -1,4 +1,4 @@
-import{g as M}from"./index-897449d8.js";var j={exports:{}};/*!
+import{g as M}from"./index-a1e47a3e.js";var j={exports:{}};/*!
   * Bootstrap index.js v5.2.3 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)

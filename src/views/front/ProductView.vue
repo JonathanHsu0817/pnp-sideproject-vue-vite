@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-7" >
-          <div class="description d-flex flex-column h-100 text-primary px-0 px-lg-3 pb-3" >
+          <div class="description d-flex flex-column h-100 text-primary px-0 px-lg-3 pb-3 pb-md-0" >
             <p class="text-secondary mt-3 mb-2">{{ product.category }}</p>
             <h2 class="description-title text-primary mb-5">{{ product.title }}</h2>
             <p class="description-content fs-7 fs-lg-6 text-black mb-5">{{ product.description }}</p>

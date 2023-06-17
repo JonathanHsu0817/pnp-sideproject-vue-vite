@@ -7,7 +7,10 @@
       </div>
       <button type="button" class="btn-close text-reset me-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div v-if="!carts.length" class="text-center mb-8">購物車沒有任何品項</div>
+    <div v-if="!carts.length" class="col-12 d-flex flex-column justify-content-center align-items-center mb-8">
+      <p class="mb-4"><i class="fas fa-shopping-cart text-primary mb-2 me-2 fs-5"></i>購物車內沒有商品</p>
+      <a class="btn btn-primary py-3 px-5 text-dark" role="button" @click="this.$router.push('/products')">再去晃晃吧</a>
+    </div>
     <div v-for="cartItem in carts" :key="cartItem.id" class="cart-body px-3 font-monospace">
       <div class="cart-card d-flex align-items-center border-bottom border-1 pb-4 mb-4">
         <img class="cart-img object-position-top me-2 me-md-3" :src="cartItem.product.imageUrl" :alt="cartItem.product.title">
@@ -16,7 +19,7 @@
           <span class="text-primary">{{ `NT$ ${priceFormat(cartItem.product.price)}` }}</span>
         </div>
         <div class="cart-num col-2 ms-2 ms-md-3">
-          <input type="number" class="cart-input text-center lh-1 py-3" id="cart-input" v-model.number="cartItem.qty"  @change="updateCart(cartItem)" :disabled="cartItem.id === loadingItem">
+          <input type="number" class="cart-input text-center lh-1 py-3" id="cart-input" v-model.number="cartItem.qty" @change="updateCart(cartItem)" :disabled="cartItem.id === loadingItem">
         </div>
         <a href="#" class="cart-delete d-block ms-4 ms-md-3" @click="delCart(cartItem.id)" :disabled="cartItem.id === loadingItem">
           <i v-if="cartItem.id === loadingItem" class="fas fa-spinner fa-pulse" ></i>
@@ -32,18 +35,18 @@
     </div>
     <div class="cart-footer px-3 font-monospace">
       <div class="d-flex flex-column">
-        <a href="#" class="js-confirm btn btn-primary text-white round-0 py-3 mb-6">加點</a>
-        <a href="#" class="js-deleteAllCart btn btn-outline-secondary border-0 round-0 align-self-center py-2 px-4 mb-4" @click="delCarts()">清空購物車</a>
+        <button href="#" class="js-confirm btn btn-primary text-white round-0 py-3 mb-6" @click="this.$router.push('/cart'),hide()" :disabled="!carts.length">前往結帳</button>
+        <button href="#" class="js-deleteAllCart btn btn-outline-secondary border-0 round-0 align-self-center py-2 px-4 mb-4" @click="delCarts()">清空購物車</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Offcanvas from 'bootstrap/js/dist/offcanvas.js'
-
 import { mapState, mapActions } from 'pinia';
 import cartStore from '@/stores/cartStore.js'
+
+import Offcanvas from 'bootstrap/js/dist/offcanvas.js'
 
 export default {
   data() {
@@ -69,7 +72,7 @@ export default {
     this.getCart()
   },
   computed: {
-    ...mapState(cartStore, ['carts','loadingItem','total'])
+    ...mapState(cartStore, ['carts','total','loadingItem'])
   }
 }
 </script>

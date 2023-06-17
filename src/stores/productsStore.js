@@ -18,6 +18,7 @@ export default defineStore('productsStore',{
       axios.get(`${VITE_API_URL}/api/${VITE_API_PATH}/products?page=${pageNum}&category=${this.category}`)
       .then(res => {
         this.products = res.data.products
+        console.log(res.data)
         this.pagination = res.data.pagination
         this.isLoading = false
       })

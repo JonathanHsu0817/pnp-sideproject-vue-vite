@@ -280,3 +280,12 @@ $utilities: map-merge(
       opacity: 100%;
   }
 }
+
+.input-num {
+  padding: 6px 0;
+  max-width: 40px;
+
+  @include media-breakpoint-up(sm) {
+    max-width: 80px;
+  }
+}

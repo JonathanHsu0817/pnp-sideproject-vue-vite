@@ -92,19 +92,19 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">產品描述</label>
                     <textarea id="description" type="text" class="form-control"
-                            placeholder="請輸入產品描述" v-model="modalProductData.description">
+                      placeholder="請輸入產品描述" v-model="modalProductData.description">
                     </textarea>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">說明內容</label>
                     <textarea id="description" type="text" class="form-control"
-                            placeholder="請輸入說明內容" v-model="modalProductData.content">
+                      placeholder="請輸入說明內容" v-model="modalProductData.content">
                     </textarea>
                 </div>
                 <div class="mb-3">
                   <div class="form-check">
                       <input id="is_enabled" class="form-check-input" type="checkbox"
-                              :true-value="1" :false-value="0" v-model="modalProductData.is_enabled">
+                        :true-value="1" :false-value="0" v-model="modalProductData.is_enabled">
                       <label class="form-check-label" for="is_enabled">是否啟用</label>
                   </div>
                 </div>

@@ -32,14 +32,14 @@
                 <td>{{ date(order.create_at )}}</td>
                 <td>{{ order.user.email }}</td>
                 <td>
-                  <ul class="list-unstyled">
+                  <ul class="list-unstyled mb-0">
                     <li v-for="(product) in order.products" :key="product.id">
                       {{ product.product.title }} 數量：{{ product.qty }}
                       {{ product.product.unit }}
                     </li>
                   </ul>
                 </td>
-                <td class="text-end">{{ order.total }}</td>
+                <td>{{ order.total }}</td>
                 <td>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" :id="order.id"
@@ -105,7 +105,7 @@ export default {
 	methods:{
 		getOrdersData(pageNum = 1){
       this.isLoading = true
-			this.$http.get(`${VITE_API_URL}api/${VITE_API_PATH}/admin/orders/?page=${pageNum}`)
+			this.$http.get(`${VITE_API_URL}/api/${VITE_API_PATH}/admin/orders/?page=${pageNum}`)
 				.then(res=>{
 					this.orders = res.data.orders;
           this.pagination = res.data.pagination;
@@ -123,7 +123,7 @@ export default {
 		},
 		updateOrdersData(){
       this.isLoading = true
-			let url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/order/${this.tempOrder.id}`;
+			let url = `${VITE_API_URL}/api/${VITE_API_PATH}/admin/order/${this.tempOrder.id}`;
 			let http = 'put';
 
 			this.$http[http](url, { data: this.tempOrder })
@@ -150,7 +150,7 @@ export default {
 		},
 		delOrder() {
       this.isLoading = true
-			const url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/order/${this.temporder.id}`;
+			const url = `${VITE_API_URL}/api/${VITE_API_PATH}/admin/order/${this.tempOrder.id}`;
 
 			this.$http.delete(url)
 				.then(res => {

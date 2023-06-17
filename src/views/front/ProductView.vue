@@ -68,13 +68,11 @@ export default {
       qty: 1,
       isLoading: false,
       allImagesUrl: [],
-      // category: '',
-      // products: [] //傳給recommendSwiper
     }
   },
   methods: {
     priceFormat(price){
-      return price.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     },
     btnMinus(){
       if( this.qty == 1 ){

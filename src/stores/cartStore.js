@@ -21,7 +21,6 @@ export default defineStore('cartStore',{
           this.carts = res.data.data.carts
           this.total = res.data.data.total
           this.final_total = res.data.data.final_total
-          console.log(this.carts)
         })
         .catch(err => Toast(err.response.data.message, 'error'))
     },
@@ -76,6 +75,6 @@ export default defineStore('cartStore',{
           this.loadingItem = ''
         })
         .catch(err => Toast(err.response.data.message, 'error'))
-    }
+    },
   }
 })

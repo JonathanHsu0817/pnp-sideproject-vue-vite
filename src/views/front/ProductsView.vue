@@ -40,7 +40,6 @@
 import { mapState, mapActions } from 'pinia';
 import productsStore from '@/stores/productsStore.js'
 import cartStore from '@/stores/cartStore.js'
-
 import Pagination from '@/components/PaginationComponent.vue';
 
 export default {

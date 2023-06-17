@@ -61,7 +61,7 @@
     methods: {
       login() {
         this.isLoading = true
-        const api = `${VITE_API_URL}admin/signin`;
+        const api = `${VITE_API_URL}/admin/signin`;
         this.$http.post(api, this.user)
           .then(res => {
             const { token, expired, message } = res.data;

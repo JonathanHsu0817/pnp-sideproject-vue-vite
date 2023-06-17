@@ -39,7 +39,7 @@
       <div class="w-100 bg-img" style="background-image: url('https://raw.githubusercontent.com/JonathanHsu0817/pnp-sideproject-vue-vite/main/public/ImgBanner05.png');"></div>
     </SwiperSlide>
     <SwiperSlide >
-      <div class="w-100 bg-img" style="background-image: url('/ImgBanner06.png');"></div>
+      <div class="w-100 bg-img" style="background-image: url('https://raw.githubusercontent.com/JonathanHsu0817/pnp-sideproject-vue-vite/main/public/ImgBanner06.png');"></div>
     </SwiperSlide>
   </Swiper>
 </template>

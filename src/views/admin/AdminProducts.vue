@@ -62,7 +62,7 @@
       </div>
       <!-- pagination -->
       <div class="card-footer bg-transparent -mt-xs-1">
-        <Pagination :pagination="pagination" :get-items = "getProductsData" @change-page="getProductsData"></Pagination>
+        <Pagination :pagination="pagination" @change-page="getProductsData"></Pagination>
       </div>
     </div>
   </div>
@@ -103,7 +103,7 @@ export default {
 	methods:{
 		getProductsData(pageNum = 1){
       this.isLoading = true
-			this.$http.get(`${VITE_API_URL}api/${VITE_API_PATH}/admin/products/?page=${pageNum}`)
+			this.$http.get(`${VITE_API_URL}/api/${VITE_API_PATH}/admin/products/?page=${pageNum}`)
 				.then(res=>{
 					this.products = res.data.products;
           this.pagination = res.data.pagination;
@@ -121,11 +121,11 @@ export default {
 		},
 		updateProductsData(){
       this.isLoading = true
-			let url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/product`;
+			let url = `${VITE_API_URL}/api/${VITE_API_PATH}/admin/product`;
 			let http = 'post';
 
 			if(!this.isNew){
-				url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
+				url = `${VITE_API_URL}/api/${VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
 				http = 'put';
 			}
 
@@ -153,7 +153,7 @@ export default {
 		},
 		delProduct() {
       this.isLoading = true
-			const url = `${VITE_API_URL}api/${VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
+			const url = `${VITE_API_URL}/api/${VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
 
 			this.$http.delete(url)
 				.then(res => {

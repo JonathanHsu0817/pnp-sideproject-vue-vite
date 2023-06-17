@@ -28,15 +28,19 @@ const router = createRouter({
         },
         {
           path: 'product/:id',
-          component: () => import('../views/front/ProductView.vue')
+          component: () => import('../views/front/ProductView.vue'),
         },
         {
           path: 'cart',
           component: () => import('../views/front/CartCheck.vue')
         },
         {
-          path: 'payment',
-          component: () => import('../views/front/PaymentView.vue')
+          path: 'payment/:orderId',
+          component: () => import('../views/front/PaymentView.vue'),
+        },
+        {
+          path: 'paymentComplete/:orderId',
+          component: () => import('../views/front/PaymentComplete.vue'),
         },
       ]
     },

@@ -1,9 +1,9 @@
 <template>
-  <div class="footer bg-primary" style="background-image: url('/ImgFooter.svg'); background-repeat: no-repeat; background-position: bottom 0px right 0px;">
+  <div class="footer bg-primary" style="background-image: url('ImgFooter.svg'); background-repeat: no-repeat; background-position: bottom 0px right 0px;">
     <div class="container-xl pb-28 pb-sm-16">
       <div class="footer-head d-flex justify-content-between mb-7 px-sm-1">
         <div class="logo mt-8">
-          <RouterLink to="/" class="footer-logo icon-hover"><img src="/LogoFooter.svg" alt="logofooter"></RouterLink>
+          <RouterLink to="/" class="footer-logo icon-hover"><img src="LogoFooter.svg" alt="logofooter"></RouterLink>
         </div>
         <div class="platform d-flex mt-7">
           <a href="https://www.facebook.com/palnpals" class="d-block icon-hover"><i class="fab fa-facebook fs-2 text-white me-7"></i></a>
